@@ -61,17 +61,25 @@ class Open():
 		return contentList
 
 class Classifier():
-	def list_classifer(self,content_data, sub_sub_category):
-		pass
 
-	def match(self, keyword_list, article_list,title_list, number_list):
+	def list_creator(self, content_data):
+
+		keyword_list = []
+		value_list = []
+
+		#for key, value in content_data.iteritems():
+			#keyword_list.append(key)
+			#value_list.append(value)
+
+		return keyword_list, value_list
+
+	def match(self, keyword_list, article_list, title_list, number_list):
 
 		#{title:[[content][link][{keyword:number_of_keywords_found}]]}
 
 		#{title:[[content][link][results_for_article]]}
 
 		result_list = []
-
 		
 		for article, link, title, number in map(article_list, link_list, title_list, number_list):
 			results_for_article = []
@@ -82,7 +90,7 @@ class Classifier():
 				keyword_and_number_found = {keyword: number_of_keywords_found}
 				results_for_article.append(keyword_and_number_found)
 
-			result = {number:[[title],[article],[link],[results_for_article]]}
+			result = {number:[title, article, link, results_for_article]}
 
 			result_list.append(result)
 
@@ -92,14 +100,13 @@ class Classifier():
 open_file = Open()
 compile_content = open_file.compile_content()
 
+#classify_file = Classifier()
+#result = classify_file.list_creator(compile_content)
+#print result
+
 print compile_content[0]
 
 
-
-
-
-#interate(data1)
-#interate(data2)
 
 # Data output looks like: {'title':['content', 'link', [{'subsub': numlinks}]]}
 
