@@ -36,16 +36,24 @@ class Open():
 		return category, subCategory, subSubCategory
 
 	def compile_content(self):
-		#Vida content cards
-		f2 = open('vida_content_cards_12_03_2014.csv', 'rU')
+	
+		# Vida content cards
+		f2 = open('content_cards.csv', 'rU')
 
 		csv_f2 = csv.reader(f2, dialect=csv.excel)
 
 		contentData = {}
+		contentList = []
 
 		# Title from Excel sheet column B becomes key and value containts content body and permalinks stored as strings in a list
 		for row in csv_f2:
-			contentData[row[1]] = [row[2],row[4]]
+			contentData[row[0]] = [row[1], row[2], row[4]]
+
+		# Take contentData and store it in list of dictionaries where each dict holds one title as key and contnt/permalink as value
+		for k, v in contentData.items():
+			data = {}
+			data[k] = v
+			contentList.append(data)
 
 		f2.close()
 
@@ -88,3 +96,8 @@ print compile_content
 
 
 
+
+#interate(data1)
+#interate(data2)
+
+# Data output looks like: {'title':['content', 'link', [{'subsub': numlinks}]]}
