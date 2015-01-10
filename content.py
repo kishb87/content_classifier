@@ -41,6 +41,7 @@ class Open():
 		f2 = open('content_cards.csv', 'rU')
 
 		csv_f2 = csv.reader(f2, dialect=csv.excel)
+		csv_f2.next()
 
 		contentData = {}
 		contentList = []
@@ -57,7 +58,7 @@ class Open():
 
 		f2.close()
 
-		return contentData
+		return contentList
 
 class Classifier():
 	def list_classifer(self,content_data, sub_sub_category):
@@ -91,7 +92,7 @@ class Classifier():
 open_file = Open()
 compile_content = open_file.compile_content()
 
-print compile_content
+print compile_content[0]
 
 
 
