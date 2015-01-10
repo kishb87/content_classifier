@@ -102,3 +102,14 @@ print compile_content[0]
 #interate(data2)
 
 # Data output looks like: {'title':['content', 'link', [{'subsub': numlinks}]]}
+
+
+# Begin CSV output code
+with open('sorted_content', 'wb') as csvfile:
+	fieldnames = ['number', 'title', 'content', 'permalink', 'keyword', 'number found']
+	writer = csv.DictWriter(csvfile, fieldnames=fieldnames, dialect=csv.excel, delimiter='|')
+
+	writer.writeheader()
+	for key, value in result_list.items():
+		writer.writerow([key, value])
+
