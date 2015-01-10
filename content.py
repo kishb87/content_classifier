@@ -1,5 +1,7 @@
 # -*- coding: utf-8 -*-
 
+#Need an array called keys to access dictionary
+
 import re, csv
 
 
@@ -90,11 +92,14 @@ class Classifier():
 				keyword_and_number_found = {keyword: number_of_keywords_found}
 				results_for_article.append(keyword_and_number_found)
 
-			result = {number:[title, article, link, results_for_article]}
+			result = [number, title, article, link, results_for_article]
 
 			result_list.append(result)
 
 		return result_list
+
+#class Writer():
+
 
 
 open_file = Open()
@@ -104,7 +109,7 @@ compile_content = open_file.compile_content()
 #result = classify_file.list_creator(compile_content)
 #print result
 
-print compile_content[0]
+print compile_content[0]['643'][1]
 
 
 
@@ -112,11 +117,11 @@ print compile_content[0]
 
 
 # Begin CSV output code
-with open('sorted_content', 'wb') as csvfile:
-	fieldnames = ['number', 'title', 'content', 'permalink', 'keyword', 'number found']
-	writer = csv.DictWriter(csvfile, fieldnames=fieldnames, dialect=csv.excel, delimiter='|')
+#with open('sorted_content', 'wb') as csvfile:
+#	fieldnames = ['number', 'title', 'content', 'permalink', 'keyword', 'number found']
+#	writer = csv.DictWriter(csvfile, fieldnames=fieldnames, dialect=csv.excel, delimiter='|')
 
-	writer.writeheader()
-	for key, value in result_list.items():
-		writer.writerow([key, value])
+#	writer.writeheader()
+#	for key, value in result_list.items():
+#		writer.writerow([key, value])
 
