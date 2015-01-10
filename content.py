@@ -14,23 +14,20 @@ class Open():
 
 		csv_f = csv.reader(f, dialect=csv.excel)
 
-		contentData = {}
-		numberList = []
+		contentList = []
+		csv_f.next()
 
 		for row in csv_f:
-			numberList.append(row[0])
 
-		# Title from Excel sheet column B becomes key and value containts content body and permalinks stored as strings in a list
-		# for row in csv_f2:
-		# 	contentData[row[0]] = [row[1], row[2], row[4]]
+			# content array holds one row from CSV and clears each time through the loop to hold new row
+			content = []
 
-		# Take contentData and store it in list of dictionaries where each dict holds one title as key and contnt/permalink as value
-		# for k, v in contentData.items():
-		# 	data = {}
-		# 	data[k] = v
-		# 	contentList.append(data)
+			for item in row:
+				content.append(item)
 
-		f2.close()
+			contentList.append(content)
+
+		f.close()
 
 		return contentData
 
