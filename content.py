@@ -13,11 +13,18 @@ class Open():
 
 		csv_f = csv.reader(f, dialect=csv.excel)
 
-		contentData = {}
-		numberList = []
+		contentList = []
+		csv_f.next()
 
 		for row in csv_f:
-			numberList.append(row[0])
+
+			# content array holds one row from CSV and clears each time through the loop to hold new row
+			content = []
+
+			for item in row:
+				content.append(item)
+
+			contentList.append(content)
 
 		f.close()
 
