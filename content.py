@@ -1,6 +1,5 @@
 # -*- coding: utf-8 -*-
 
-#Need an array called keys to access dictionary
 
 import re, csv
 
@@ -20,56 +19,34 @@ class Open():
 		for row in csv_f:
 			numberList.append(row[0])
 
-		# Title from Excel sheet column B becomes key and value containts content body and permalinks stored as strings in a list
-		# for row in csv_f2:
-		# 	contentData[row[0]] = [row[1], row[2], row[4]]
-
-		# Take contentData and store it in list of dictionaries where each dict holds one title as key and contnt/permalink as value
-		# for k, v in contentData.items():
-		# 	data = {}
-		# 	data[k] = v
-		# 	contentList.append(data)
-
-		f2.close()
+		f.close()
 
 		return contentData
 
 class Classifier():
 
-	def list_creator(self, content_data):
+	def match(self):
 
-		keyword_list = []
-		value_list = []
+		row_list = [[1711,"How to find a new fitness fitness fitness fitness gym that will work for you","<p>In general, I like fitness and new things.</p>","https://www.vida.com/content/how-to-find-a-gym-that-will-work-for-you","fitness","new","gym"],[1711,"How to find a gym that will work for you","<p>Finding a gym is a fun and an exciting part of your health journey. When looking for a gym consider what is important to you. There are many gyms out there from the bare bones gym to the full service athletic club. For example you may want access to a pool and jacuzzi, classes that are included in your membership, specific exercise equipment or child care services.</p>","https://www.vida.com/content/how-to-find-a-gym-that-will-work-for-you","General fitness","new","gym"]]	
+	
+		keywords_per_article = []
+		for row in row_list:
+			content = [row[1],row[2],row[3]]
+			keywords = [row[4],row[5],row[6]]
+			result_list = []
+			for keyword in keywords:
+				keyword_list = []
+				for content_item in content:
+					keywords_found = re.findall(keyword, content_item)
+					keyword_number = len(keywords_found)
+					keyword_list.append(keyword_number)
+					keyword_total = sum(keyword_list)
+				result_list.append(keyword_total)
+			keywords_per_article.append(result_list)
 
-		#for key, value in content_data.iteritems():
-			#keyword_list.append(key)
-			#value_list.append(value)
+		print keywords_per_article
 
-		return keyword_list, value_list
-
-	def match(self, keyword_list, article_list, title_list, number_list):
-
-		#{title:[[content][link][{keyword:number_of_keywords_found}]]}
-
-		#{title:[[content][link][results_for_article]]}
-
-		result_list = []
 		
-		for article, link, title, number in map(article_list, link_list, title_list, number_list):
-			results_for_article = []
-
-			for keyword in keyword_list:
-				keywords_found = re.findall(keyword, article)
-				number_of_keywords_found = len(keywords_found)
-				keyword_and_number_found = {keyword: number_of_keywords_found}
-				results_for_article.append(keyword_and_number_found)
-
-			result = [number, title, article, link, results_for_article]
-
-			result_list.append(result)
-
-		return result_list
-
 #class Writer():
 
 
@@ -77,11 +54,12 @@ class Classifier():
 open_file = Open()
 compile_content = open_file.compile_content()
 
-#classify_file = Classifier()
-#result = classify_file.list_creator(compile_content)
+
+classify_file = Classifier()
+result = classify_file.match()
 #print result
 
-print compile_content[0]['643'][1]
+#print compile_content[0]['643'][1]
 
 
 
