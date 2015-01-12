@@ -62,12 +62,8 @@ class Classifier():
 				row.append(keyword_total)  
 				
 		#Returns as follows [article number, title, content, permalink, cat1, cat2, cat3, cat1 #, cat2 #, cat3 #]
-		return content_data
-		
-
-
-
-		
+		print content_data
+				
 #class Writer():
 
 
